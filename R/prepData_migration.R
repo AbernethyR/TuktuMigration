@@ -35,6 +35,7 @@ prepData_migration <- function(data, id.col = "ID", x.col = NULL, y.col = NULL,
     df$x <-  st_coordinates(data)[,1]/1e3
     df$y <-  st_coordinates(data)[,2]/1e3
   } else {
+    df <- as.data.frame(data)#df was missing from this end of else statement
     df$x <- data[,x.col]/1e3
     df$y <- data[,y.col]/1e3
   }
