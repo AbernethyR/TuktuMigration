@@ -44,7 +44,7 @@ prepData_migration <- function(data, id.col = "ID", x.col = NULL, y.col = NULL,
     df$yday <- df[,yday] else
       df$yday <- lubridate::yday(df[,time.col])
     df$id <- as.integer(factor(as.character(df[,id.col])))
-    df$dday <- tapply(df$yday, df$id, function(x) c(0,diff(x)))
+    df$dday <- unlist(tapply(df$yday, df$id, function(x) c(0,diff(x))))#unlist needed to assign to df$dday
     
     stan_data <- with(df, list(n = length(x), 
                                k = length(unique(id)),
